@@ -11,16 +11,16 @@
 <li>每个变量，包括 i 都暴露在全局作用域下，污染了 window 变量</li>
 <li>定时处理函数中存在函数外的变量 i （闭包），而定数处理函数被压入事件队列延迟执行，而执行的手 i 可能发生变化</li>
 </ol>
-<h2 id="改进的版本一"><a href="#改进的版本一" class="headerlink" title="改进的版本一"></a>改进的版本一</h2><p>(function() {<br>    var a = [1, 2, 3, 4],<br>    i = 0,<br>    length = a.length;<br>    for(; i &lt; length; i ++) {<br>        (function(j) {<br>            setTimeout(function() {<br>                    console.info(a[j]);<br>            }, i * 1000);<br>        })(i)<br>    }<br>})()</p>
+<h2 id="改进的版本一"><a href="#改进的版本一" class="headerlink" title="改进的版本一"></a>改进的版本一</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">(function() &#123;</div><div class="line">    var a = [1, 2, 3, 4],</div><div class="line">    i = 0,</div><div class="line">    length = a.length;</div><div class="line">    for(; i &lt; length; i ++) &#123;</div><div class="line">        (function(j) &#123;</div><div class="line">            setTimeout(function() &#123;</div><div class="line">                    console.info(a[j]);</div><div class="line">            &#125;, i * 1000);</div><div class="line">        &#125;)(i)</div><div class="line">    &#125;</div><div class="line">&#125;)()</div></pre></td></tr></table></figure>
 <p>这个版本改进了上面的两个问题，解决方案也非常暴力，用 IFEE 在定义额外的作用域。<br>我们知道 javascript 语言默认是 function scope。解决问题二的思路就是在处理函数外定义一个 IFEE，把外部变量 <strong>复制</strong> 一份进来，从而形成一个新的作用域（变量）。这样处理函数回头执行的之后就不会找丢了。</p>
-<h3 id="改进的版本二"><a href="#改进的版本二" class="headerlink" title="改进的版本二"></a>改进的版本二</h3><p>let a = [1, 2, 3, 4];<br>let length = a.length;<br>for(let i = 0; i &lt; length; i++) {<br>    setTimeout(() =&gt; {console.info(a[i])}, i * 1000);<br>}<br>console.info(window.a);</p>
+<h3 id="改进的版本二"><a href="#改进的版本二" class="headerlink" title="改进的版本二"></a>改进的版本二</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">let a = [1, 2, 3, 4];</div><div class="line">let length = a.length;</div><div class="line">for(let i = 0; i &lt; length; i++) &#123;</div><div class="line">    setTimeout(() =&gt; &#123;console.info(a[i])&#125;, i * 1000);</div><div class="line">&#125;</div><div class="line">console.info(window.a);</div></pre></td></tr></table></figure>
 <p>这个版本避免使用了丑陋的 IFEE，用 let 作为变量定义。</p>
 <ol>
 <li>let声明的全局变量不是全局对象的属性。这就意味着，你不可 以通过window.变量名的方式访问这些变量。它们只存在于一个不可见的块的作用域中，这个块理论上是Web页面中运行的所有JS代码的外层块。</li>
 <li>let声明的变量拥有块级作用域。也就是说用let声明的变量的作用域只是外层块，而不是整个外层函数。</li>
 <li>形如for (let x…)的循环在每次迭代时都为x创建新的绑定。</li>
 </ol>
-<h3 id="改进版本三"><a href="#改进版本三" class="headerlink" title="改进版本三"></a>改进版本三</h3><p>[1, 2, 3, 4].forEach((e, i) =&gt; {setTimeout( ()=&gt; {console.info(e)}, i * 1000)})</p>
+<h3 id="改进版本三"><a href="#改进版本三" class="headerlink" title="改进版本三"></a>改进版本三</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1, 2, 3, 4].forEach((e, i) =&gt; &#123;setTimeout( ()=&gt; &#123;console.info(e)&#125;, i * 1000)&#125;)</div></pre></td></tr></table></figure>
 <p>是的，一行代码解决所有问题，这是函数式编程的魅力！</p>
 <p>这个这个版本中，执行函数中引用的变量 e，是在当前迭代轮次的处理函数中的变量 e，每次迭代 e 的作用域都不是不一样的，因此 4个执行函数包含了 4作用域 e 变量的闭包，当然不会出问题了。</p>
 <p>结论，多用 es6语法，但要知道它给我们带来的哪些好处。先苦后甜的道理在哪里都不会错。</p>
