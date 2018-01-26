@@ -1,10 +1,47 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>http 头部详解 | 明志维新</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">http 头部详解</h1><a id="logo" href="/.">明志维新</a><p class="description">持续的技术变革</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">http 头部详解</h1><div class="post-meta">Jan 18, 2016<span> | </span><span class="category"><a href="/categories/技术分享/">技术分享</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-disqus-identifier="2016/01/18/2016-01-18.go-into-the-http-head/" href="/2016/01/18/2016-01-18.go-into-the-http-head/#disqus_thread" class="disqus-comment-count"></a><div class="post-content"><p>HTTP 首部字段是构成 HTTP 报文的要素之一。在客户端与服务端之间以 HTTP 协议进行通信的过程中，无论是请求还是响应都会使用首部字段，它能够起到传递额外重要信息的作用。</p>
-<h2 id="4种-HTTP-首部字段类型"><a href="#4种-HTTP-首部字段类型" class="headerlink" title="4种 HTTP 首部字段类型"></a>4种 HTTP 首部字段类型</h2><p>HTTP 首部字段根据实际用途被分为以下4种类型。</p>
-<h3 id="通用首部字段"><a href="#通用首部字段" class="headerlink" title="通用首部字段"></a>通用首部字段</h3><pre><code>请求报文和响应报文两方都会使用的首部
-</code></pre></div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yqfang.github.io/2016/01/18/2016-01-18.go-into-the-http-head/" data-id="cjcv9338v0005y2kwe7h9pi6g" class="article-share-link">分享到</a><div class="tags"><a href="/tags/http/">http</a></div><div class="post-nav"><a href="/2016/01/21/2016-01-21.cvs-command-issues/" class="pre">cvs 命令那些事</a><a href="/2016/01/17/2016-01-17.hexo-source-scaffold-theme-structure/" class="next">hexo博客的三个主角：脚手架，内容，主题</a></div><div id="disqus_thread"><script>var disqus_shortname = 'fangyuqing';
-var disqus_identifier = '2016/01/18/2016-01-18.go-into-the-http-head/';
-var disqus_title = 'http 头部详解';
-var disqus_url = 'http://yqfang.github.io/2016/01/18/2016-01-18.go-into-the-http-head/';
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>tmux-vim-workflow.md | 明志维新</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/5.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">tmux-vim-workflow.md</h1><a id="logo" href="/.">明志维新</a><p class="description">持续的技术变革</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">tmux-vim-workflow.md</h1><div class="post-meta">Jan 26, 2018<span> | </span><span class="category"><a href="/categories/技术/">技术</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-disqus-identifier="2018/01/26/2018-01-26.tmux-vim-workflow-md/" href="/2018/01/26/2018-01-26.tmux-vim-workflow-md/#disqus_thread" class="disqus-comment-count"></a><div class="post-content"><h2 id="intro">前言</h2>
+
+<pre><code>定时迭代数组 `[1, 2, 3, 4]` 按照顺序每秒 console 一个元素。这是道 javascript 的经典面试题。
+我们来说说关于它的一些解法和背后的故事。
+</code></pre><a id="more"></a>
+<p>我的 tmux vim 工作流</p>
+<p>本文主要从 vim 和 tmux 两个方面来逐渐迭代开发中总结的笔记</p>
+<ul>
+<li>my vim version : 8.0.1428</li>
+<li>tmux version:  2.6</li>
+<li>vim 包管理：<a href="https://github.com/amix/vimrc" target="_blank" rel="noopener">https://github.com/amix/vimrc</a></li>
+</ul>
+<p>tmux</p>
+<p>一般来说 tmux 只需要一个 session 就可以了</p>
+<p>毕竟 session 里面可以有多个 windows，每个 windows 里面可以有多个 panel</p>
+<p>最佳实践是 session 都用自己名字命名</p>
+<p>每个 window 用项目名称命名，比如：blog，datitude，portal 等等</p>
+<p>每个window 的 panel 相对固定</p>
+<p>创建一个新的 session，session 命名为 yqfang</p>
+<pre><code>tmux new -s yqfang
+</code></pre><p>重命名默认的 window</p>
+<pre><code>&lt;c-a&gt; , 
+</code></pre><p>我的第一个 window 一般叫 main</p>
+<p>创建一个新的 window</p>
+<pre><code>&lt;c-a&gt; c
+</code></pre><p>然后记得重命名</p>
+<p>在不同的 window 间切换</p>
+<pre><code>&lt;c-a&gt; 1,2,3
+</code></pre><p>默认 tmux 都是从 0 开始</p>
+<pre><code>set -g base-index 1 //  让 tmux 从 1 开始计数
+</code></pre><p>tmux window 默认名称会自动变化</p>
+<pre><code>set allow-rename off // 关闭 window 名称自动变化
+</code></pre><p>vim</p>
+<p>跳转是使用 vim 开发时最大的问题</p>
+<pre><code>vim easymotion 解决了这个最大的困扰
+</code></pre><p>how to remove the title of the vim file?</p>
+<p>how to append at the end of the word? </p>
+<pre><code>ea
+</code></pre><p>how to move the cursor to the last character of the previously changed or  yanked text ?</p>
+<pre><code>&apos;]
+</code></pre></div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yqfang.github.io/2018/01/26/2018-01-26.tmux-vim-workflow-md/" data-id="cjcv9339d000qy2kwy10h5top" class="article-share-link">分享到</a><div class="tags"><a href="/tags/vim/">vim</a><a href="/tags/tmux/">tmux</a></div><div class="post-nav"><a href="/2017/06/09/2017-06-09.for-closure-let/" class="next">那些关于定时迭代的事儿</a></div><div id="disqus_thread"><script>var disqus_shortname = 'fangyuqing';
+var disqus_identifier = '2018/01/26/2018-01-26.tmux-vim-workflow-md/';
+var disqus_title = 'tmux-vim-workflow.md';
+var disqus_url = 'http://yqfang.github.io/2018/01/26/2018-01-26.tmux-vim-workflow-md/';
 (function() {
   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
   dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
